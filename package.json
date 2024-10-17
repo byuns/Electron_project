@@ -1,53 +1,58 @@
 {
-  "name": "start-electron",
+  "name": "oracle-backup",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
-      "start": "electron .",
-      "deploy:osx": "electron-builder --mac",
-      "deploy:win": "npm run deploy:win32 && npm run deploy:win64",
-      "deploy:win32": "electron-builder --win nsis:ia32",
-      "deploy:win64": "electron-builder --win nsis:x64"
+    "start": "electron .",
+    "deploy:osx": "electron-builder --mac",
+    "deploy:win": "npm run deploy:win32 && npm run deploy:win64",
+    "deploy:win32": "electron-builder --win nsis:ia32",
+    "deploy:win64": "electron-builder --win nsis:x64"
   },
-  "build": {
-      "productName": "Start Electron",
-      "appId": "net.jetalab.ex.startelectron",
-      "asar": true,
-      "mac": {
-          "target": [
-              "default"
-          ]
-      },
-      "dmg": {
-          "title": "Start Electron"
-      },
-      "win": {
-          "target": [
-              {
-                  "target": "nsis",
-                  "arch": [
-                      "x64",
-                      "ia32"
-                  ]
-              }
-          ]
-      },
-      "nsis": {
-          "oneClick": false,
-          "allowToChangeInstallationDirectory": false,
-          "createDesktopShortcut": true
-      },
-      "directories": {
-          "buildResources": "./resources/installer/",
-          "output": "./dist/",
-          "app": "."
-      }
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "oracledb": "^6.5.1",
+    "svn": "^0.4.0"
+  },
   "devDependencies": {
-      "electron": "^17.1.1",
-      "electron-builder": "^22.14.13"
+    "electron": "^31.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "productName": "Start Electron",
+    "appId": "net.jetalab.ex.startelectron",
+    "asar": true,
+    "mac": {
+      "target": [
+        "default"
+      ]
+    },
+    "dmg": {
+      "title": "Start Electron"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true
+    },
+    "directories": {
+      "buildResources": "./resources/installer/",
+      "output": "./dist/",
+      "app": "."
+    }
   }
 }

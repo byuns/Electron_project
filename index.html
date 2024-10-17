@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>사과 가져오기</title>
-    </head>
-    <body>
-        <p>
-            <button id="btnCount">사과 갯수 확인하기</button>
-            <button id="btnSteal">사과 가져오기</button>
-            <button id="btnBroadcast">갯수 알리기</button>
-        </p>
-        <p>
-            남은 사과는 <span id="txtCount"></span>개 입니다.
-        </p>
+<head>
+  <title>Oracle Backup</title>
+</head>
+<body>
+  <h1>Oracle Package Backup</h1>
+  <button id="backupBtn">Backup Now</button>
+  <div id="result"></div>
+  <script>
+    document.getElementById('backupBtn').addEventListener('click', () => {
 
-        <script>
-            const electron = require('electron');
+      const button = document.getElementById('backupBtn');
+      const status = document.getElementById('result');
 
-            const print = (num = 10) => document.getElementById('txtCount').innerText = num;
-            
-            // 버튼 클릭 시 메인 프로세스로 각각의 신호를 보냄
-            document.getElementById('btnCount').onclick = () => electron.ipcRenderer.send('reqCount');
-            document.getElementById('btnSteal').onclick = () => electron.ipcRenderer.send('reqSteal');
-            document.getElementById('btnBroadcast').onclick = () => electron.ipcRenderer.send('reqBroadcast');
-           
-            electron.ipcRenderer.on('count', (e, count) => print(count));
+      button.disabled = true;
+      status.textContent = 'Backup in progress...';
 
-            print();
 
-        </script>
-    </body>
+      console.log('Backup button clicked');
+      window.electron.send('backup-packages');
+    });
 
+    window.electron.receive('backup-result', (message) => {
+
+      const button = document.getElementById('backupBtn');
+      const status = document.getElementById('result');
+
+      button.disabled = false;
+      status.textContent = 'Backup Now';
+
+      console.log('Received backup result');
+      document.getElementById('result').innerText = message;
+    });
+  </script>
+</body>
 </html>
