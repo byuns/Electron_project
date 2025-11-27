@@ -37,6 +37,9 @@
  <img src="/IMG_main.png" alt="메인 화면" />
 
 
+
+ <img src="/IMG_UI_v2.png" alt="UI 수정" />
+ 
 ---
 
 ## 📌 기대 효과
